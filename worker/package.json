@@ -1,0 +1,14 @@
+{
+  "name": "worker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "dependencies": {
+    "bull": "^4.7.0",
+    "knex": "^1.0.3",
+    "pg": "^8.7.3"
+  }
+}
