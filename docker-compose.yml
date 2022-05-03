@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis
+    container_name: rent_redis
+    ports:
+      - 13000:6379
+    networks:
+      - my-network
+  postgres:
+    build: ./postgres
+    container_name: rent_postgres
+    ports:
+      - 14000:5432
+    networks:
+      - my-network
+  api:
+    build: ./api
+    container_name: rent_api
+    ports:
+      - 15000:44332
+    networks:
+      - my-network
+    depends_on:
+      - postgres
+      - redis
+  worker:
+    build: ./worker
+    container_name: rent_worker
+    ports:
+      - 16000:33221
+    networks:
+      - my-network
+    depends_on:
+      - postgres
+      - redis
+networks:
+  my-network:
+    driver: bridge
